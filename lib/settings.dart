@@ -22,9 +22,10 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 3; // Default index for Settings tab
+  double textSize = 14.0; // Default text size
 
-  // Switch states
+  // State variables for toggles
   bool rideFeedback = true;
   bool rideNotifications = true;
   bool specialAnnouncements = true;
@@ -32,19 +33,36 @@ class _SettingsPageState extends State<SettingsPage> {
   bool voiceAssist = false;
   bool hapticAndVoice = false;
   bool fullScreenNotification = false;
-  bool largerTextSize = false;
+  bool darkMode = false; // New toggle for Dark Mode
 
+  // Function to handle navigation
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+
+    // Navigate to the appropriate page based on the selected index
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, '/home'); // Navigate to Home
+        break;
+      case 1:
+        Navigator.pushNamed(context, '/rewards'); // Navigate to Rewards
+        break;
+      case 2:
+        Navigator.pushNamed(context, '/navigate'); // Navigate to Navigate
+        break;
+      case 3:
+        // Stay on the Settings Page
+        break;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('App Settings'),
+        title: Text('Settings'),
       ),
       body: ListView(
         padding: EdgeInsets.all(16),
@@ -85,6 +103,7 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           ),
           Divider(),
+
           // Privacy and Security Section
           Text(
             'Privacy and Security',
@@ -105,10 +124,11 @@ class _SettingsPageState extends State<SettingsPage> {
             subtitle: Text('Clears all saved locations, routes, and ride history'),
             trailing: Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
-              // Add functionality here for clearing personal data
+              // Add functionality for clearing personal data
             },
           ),
           Divider(),
+
           // Accessibility Section
           Text(
             'Accessibility',
@@ -144,43 +164,86 @@ class _SettingsPageState extends State<SettingsPage> {
               });
             },
           ),
+          // New Dark Mode Toggle
           SwitchListTile(
-            title: Text('Larger Text Size'),
-            subtitle: Text('Increase size of text for better visibility'),
-            value: largerTextSize,
+            title: Text('Dark Mode'),
+            subtitle: Text('Switch to a dark theme'),
+            value: darkMode,
             onChanged: (bool value) {
               setState(() {
-                largerTextSize = value;
+                darkMode = value;
+                // Implement dark mode functionality here
               });
             },
           ),
+          SizedBox(height: 16),
+
+          // Text Size Adjustment Section
+          _buildTextSizeAdjuster(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.star),
-            label: 'Favorites',
+            label: 'Rewards',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.navigation),
             label: 'Navigate',
           ),
-           BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
-          )
-          
+          ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        currentIndex: _selectedIndex, // Highlight Settings tab
+        selectedItemColor: Colors.blue, // Highlighted color
+        unselectedItemColor: Colors.grey, // Unselected color
         onTap: _onItemTapped,
       ),
+    );
+  }
+
+  // Widget for adjusting text size
+  Widget _buildTextSizeAdjuster() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Text Size',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Small', style: TextStyle(fontSize: 14)),
+            Text('Large', style: TextStyle(fontSize: 18)),
+          ],
+        ),
+        Slider(
+          value: textSize,
+          min: 10.0,
+          max: 24.0,
+          divisions: 7,
+          label: '${textSize.toStringAsFixed(1)} pt',
+          onChanged: (double newValue) {
+            setState(() {
+              textSize = newValue;
+            });
+          },
+        ),
+        SizedBox(height: 4),
+        Text(
+          'Current size: ${textSize.toStringAsFixed(1)} pt',
+          style: TextStyle(fontSize: 14),
+        ),
+      ],
     );
   }
 }

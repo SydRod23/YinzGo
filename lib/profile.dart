@@ -16,7 +16,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  // Example streak count. In a real app, this would be stored persistently.
+  int streakDays = 7; // Example streak of 7 days
+  bool isStreakActive = true; // Flag to check if streak is active
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +35,10 @@ class ProfilePage extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(16),
         children: [
+          // Streaks Feature at the top of the profile page
+          _buildStreaksSection(),
+          SizedBox(height: 24),
+
           // Profile Header
           Row(
             children: [
@@ -124,15 +137,69 @@ class ProfilePage extends StatelessWidget {
   ],
   currentIndex: 0, // Highlight the Home tab
   selectedItemColor: Colors.blue, // Color for the selected icon and label
-  unselectedItemColor: Colors.grey, // Color for the unselected icons and labels
+  unselectedItemColor: Colors.grey, // Color for unselected icons and labels
   onTap: (index) {
-    // Handle navigation here if needed
+    // Handle navigation logic here
+    // You can add navigation logic based on the tapped index
   },
 ),
 
     );
   }
 
+  // Streaks Section
+Widget _buildStreaksSection() {
+  return Container(
+    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+    decoration: BoxDecoration(
+      color: Colors.blue[50],
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'Your Streak',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(width: 8),
+                    Icon(
+                      Icons.local_fire_department, // Flame icon
+                      color: Colors.orange,
+                      size: 24,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 4),
+                Text(
+                  '$streakDays days',
+                  style: TextStyle(fontSize: 16, color: Colors.blue),
+                ),
+              ],
+            ),
+          ],
+        ),
+        Icon(
+          isStreakActive ? Icons.check_circle : Icons.remove_circle,
+          color: isStreakActive ? Colors.green : Colors.red,
+          size: 30,
+        ),
+      ],
+    ),
+  );
+}
+
+
+
+
+  // Saved Routes Section
   Widget _buildSectionHeader(String title, String actionText) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,6 +221,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
+  // Saved Item
   Widget _buildSavedItem(String text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -161,6 +229,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
+  // History Item
   Widget _buildHistoryItem(String date, String description) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -171,21 +240,21 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-Widget _buildFareTypeButton(String text, bool isSelected) {
-  return ElevatedButton(
-    style: ElevatedButton.styleFrom(
-      backgroundColor: isSelected ? Colors.green : Colors.grey[300],
-      foregroundColor: isSelected ? Colors.white : Colors.black,
-    ),
-    onPressed: () {
-      // Handle fare type selection
-    },
-    child: Text(text),
-  );
-}
+  // Fare Type Button
+  Widget _buildFareTypeButton(String text, bool isSelected) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? Colors.green : Colors.grey[300],
+        foregroundColor: isSelected ? Colors.white : Colors.black,
+      ),
+      onPressed: () {
+        // Handle fare type selection
+      },
+      child: Text(text),
+    );
+  }
 
-
-
+  // Fare Option
   Widget _buildFareOption(String title, String price) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -196,6 +265,7 @@ Widget _buildFareTypeButton(String text, bool isSelected) {
     );
   }
 
+  // Active Pass
   Widget _buildActivePass(String title, String validity) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,3 +279,4 @@ Widget _buildFareTypeButton(String text, bool isSelected) {
     );
   }
 }
+

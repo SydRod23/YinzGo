@@ -42,43 +42,52 @@ class NavigationPage extends StatelessWidget {
                   style: TextStyle(fontSize: 18, color: Colors.grey),
                 ),
                 SizedBox(height: 16),
-                Row(
-                  children: [
-                    // Search Field
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search),
-                          hintText: 'Work',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          fillColor: Colors.grey[200],
-                          filled: true,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 8),
-                    // Time Button
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        backgroundColor: Colors.grey[300],
-                        foregroundColor: Colors.black,
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.access_time, size: 16),
-                          SizedBox(width: 4),
-                          Text('20 min'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+      Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    // Search Field
+    Expanded(
+      child: TextField(
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.search),
+          hintText: 'Work',
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          fillColor: Colors.grey[200],
+          filled: true,
+        ),
+      ),
+    ),
+    SizedBox(width: 8),
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        // ETA Text
+        Text(
+          'ETA: 20 minutes',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey[700],
+          ),
+        ),
+        SizedBox(height: 4),
+        // Refresh Button
+        IconButton(
+          icon: Icon(Icons.refresh, color: Colors.blue),
+          tooltip: 'Refresh Routes',
+          onPressed: () {
+            // Refresh logic here
+            print('Refresh button pressed');
+          },
+        ),
+      ],
+    ),
+  ],
+),
+
+
               ],
             ),
           ),

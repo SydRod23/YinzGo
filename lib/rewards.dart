@@ -32,52 +32,71 @@ class RewardsCenterPage extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           SizedBox(height: 8),
-          Row(
-            children: [
-              Text(
-                '243',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
-              ),
-              SizedBox(width: 4),
-              Icon(Icons.star, color: Colors.amber),
-              Spacer(),
-              ElevatedButton(
-                onPressed: () {
-                  // Add functionality for redeeming stars
-                },
-                child: Text('Redeem Stars'),
-              ),
-            ],
+          // Star Balance Section
+Row(
+  children: [
+    Text(
+      '243',
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+    ),
+    SizedBox(width: 4),
+    Icon(Icons.star, color: Colors.amber),
+    Spacer(),
+    Row(
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            // Redeem stars functionality
+          },
+          child: Text('Redeem Stars'),
+        ),
+        SizedBox(width: 8), // Space between buttons
+        ElevatedButton(
+          onPressed: () {
+            // "Tell Us About This Trip" functionality
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.amber, // Customize button color
           ),
+          child: Text('Tell Us About Your Trip and Earn Stars'),
+        ),
+      ],
+    ),
+  ],
+),
+
           Text(
             'star balance',
             style: TextStyle(color: Colors.grey),
           ),
           SizedBox(height: 16),
 
-          // Progress Bar Section
-          Container(
-            height: 60,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Stack(
-                    alignment: Alignment.centerLeft,
-                    children: [
-                      Divider(thickness: 2),
-                      Positioned(
-                        left: 50,
-                        child: CircleAvatar(
-                          radius: 10,
-                          backgroundColor: Colors.blue,
-                        ),
-                      ),
-                    ],
-                  ),
+        // Progress Bar Section
+        Container(
+          height: 60, // Adjust container height if needed
+          child: Stack(
+            children: [
+              // Line
+              Align(
+                alignment: Alignment.center,
+                child: Divider(
+                  thickness: 2,
+                  color: Colors.grey[300],
                 ),
-              ],
-            ),
+              ),
+              // Blue dot (adjust the position here)
+              Positioned(
+                left: 300, // Adjust horizontal position
+                top: 20, // Adjust vertical position (lower it by increasing the value)
+                child: CircleAvatar(
+                  radius: 10,
+                  backgroundColor: Colors.blue,
+                ),
+              ),
+            ],
           ),
+        ),
+
 
           // Star Rewards Section
           Text(
@@ -85,11 +104,10 @@ class RewardsCenterPage extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           SizedBox(height: 8),
-          _buildRewardTile(25, 'Unlock 30 Day Access to POGOH Bike System', Colors.red),
-          _buildRewardTile(100, 'Unlock Free 3 Hour Pass - Full Fare', Colors.orange),
-          _buildRewardTile(200, 'Unlock Free 7 Rides - Full Fare', Colors.green),
-          _buildRewardTile(300, 'Unlock Free Day Pass - Full Fare', Colors.blue),
-          _buildRewardTile(400, 'Unlock Free 14 Rides - Full Fare', Colors.black),
+          _buildRewardTile(250, 'Unlock Free 3 Hour Pass - Full Fare', Colors.red),
+          _buildRewardTile(500, 'Unlock Free 7 Rides - Full Fare', Colors.orange),
+          _buildRewardTile(750, 'Unlock Free Day Pass - Full Fare', Colors.green),
+          _buildRewardTile(1000, 'Unlock Free 14 Rides - Full Fare', Colors.blue),
 
           SizedBox(height: 16),
 
