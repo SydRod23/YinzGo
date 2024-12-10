@@ -155,6 +155,10 @@ Row(
             label: 'Navigate',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.confirmation_number),
+            label: 'Tickets',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),

@@ -131,6 +131,10 @@ class _ProfilePageState extends State<ProfilePage> {
       label: 'Navigate',
     ),
     BottomNavigationBarItem(
+      icon: Icon(Icons.confirmation_number),
+      label: 'Tickets',
+    ),
+    BottomNavigationBarItem(
       icon: Icon(Icons.settings),
       label: 'Settings',
     ),

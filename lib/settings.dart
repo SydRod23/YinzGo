@@ -22,7 +22,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  int _selectedIndex = 3; // Default index for Settings tab
+  int _selectedIndex = 4; // Default index for Settings tab
   double textSize = 14.0; // Default text size
 
   // State variables for toggles
@@ -195,6 +195,10 @@ class _SettingsPageState extends State<SettingsPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.navigation),
             label: 'Navigate',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.confirmation_number),
+            label: 'Tickets',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

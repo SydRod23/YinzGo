@@ -151,6 +151,10 @@ class NavigationPage extends StatelessWidget {
             icon: Icon(Icons.navigation),
             label: 'Navigate',
           ),
+           BottomNavigationBarItem(
+            icon: Icon(Icons.confirmation_number),
+            label: 'Tickets',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
